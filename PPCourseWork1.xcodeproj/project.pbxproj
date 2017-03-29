@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3431AE8E1E896DC200A7AE69 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431AE8D1E896DC200A7AE69 /* TaskManager.swift */; };
+		3431AE901E896DF200A7AE69 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431AE8F1E896DF200A7AE69 /* DataStorage.swift */; };
 		3449E1941E8577E000BDEFFE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3449E1931E8577E000BDEFFE /* main.swift */; };
+		34A8A0E51E86596800655501 /* MergeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A8A0E41E86596800655501 /* MergeManager.swift */; };
+		34A8A0E71E865ABC00655501 /* AssignmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A8A0E61E865ABC00655501 /* AssignmentManager.swift */; };
+		34A8A0E91E865AED00655501 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A8A0E81E865AED00655501 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +28,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3431AE8D1E896DC200A7AE69 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		3431AE8F1E896DF200A7AE69 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		3449E1901E8577E000BDEFFE /* PPCourseWork1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PPCourseWork1; sourceTree = BUILT_PRODUCTS_DIR; };
 		3449E1931E8577E000BDEFFE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		34A8A0E41E86596800655501 /* MergeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeManager.swift; sourceTree = "<group>"; };
+		34A8A0E61E865ABC00655501 /* AssignmentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentManager.swift; sourceTree = "<group>"; };
+		34A8A0E81E865AED00655501 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,11 @@
 			isa = PBXGroup;
 			children = (
 				3449E1931E8577E000BDEFFE /* main.swift */,
+				34A8A0E41E86596800655501 /* MergeManager.swift */,
+				34A8A0E61E865ABC00655501 /* AssignmentManager.swift */,
+				34A8A0E81E865AED00655501 /* Config.swift */,
+				3431AE8D1E896DC200A7AE69 /* TaskManager.swift */,
+				3431AE8F1E896DF200A7AE69 /* DataStorage.swift */,
 			);
 			path = PPCourseWork1;
 			sourceTree = "<group>";
@@ -121,7 +136,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34A8A0E71E865ABC00655501 /* AssignmentManager.swift in Sources */,
+				34A8A0E51E86596800655501 /* MergeManager.swift in Sources */,
+				3431AE8E1E896DC200A7AE69 /* TaskManager.swift in Sources */,
+				3431AE901E896DF200A7AE69 /* DataStorage.swift in Sources */,
 				3449E1941E8577E000BDEFFE /* main.swift in Sources */,
+				34A8A0E91E865AED00655501 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +240,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = YSVD2VLRXZ;
+				LD_NO_PIE = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -229,6 +250,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = YSVD2VLRXZ;
+				LD_NO_PIE = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -253,6 +275,7 @@
 				3449E1991E8577E000BDEFFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

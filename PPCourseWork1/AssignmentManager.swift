@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Darwin
 
 //Assignment: A = sort(e*B + c*Z*(MO*MK))
 
@@ -16,8 +17,6 @@ class AssignmentManager: NSObject {
     var e: Int?
     var c: Int?
     var Z: [Int]?
-    var B: [Int]?
-    var MO: [[Int]]?
     var MK: [[Int]]?
     
     var start: Int {
@@ -32,9 +31,17 @@ class AssignmentManager: NSObject {
         self.process = process
     }
     
+    func copyResources(){
+        e = DataStorage.shared.e
+        c = DataStorage.shared.c
+        Z = DataStorage.shared.Z
+        MK = DataStorage.shared.MK
+    }
+    
     //solution of D = e*B + c*Z*(MO*MK)
-    func count(D: inout [Int]){
-        let matrixMult = self.matrixMult(firstPart: MO!, second: MK!)
+    func equationCalculus(D: inout [Int]){
+        
+        let matrixMult = self.matrixMult(firstPart: DataStorage.shared.MO!, second: MK!)
         
         //X = e*Z
         let X = Z!.map {$0 * c!}
@@ -43,7 +50,7 @@ class AssignmentManager: NSObject {
         let Y = matrixVectorMult(vector: X, matrixPart: matrixMult)
         
         // K = e*B
-        let K = B!.map{e! * $0}//!!!!!!!
+        let K = DataStorage.shared.B!.map{e! * $0}//!!!!!!!
         
         let result = vectorSum(first: K, second: Y)
         
@@ -52,9 +59,6 @@ class AssignmentManager: NSObject {
         }
         
     }
-  //  9	5	7
-    //6	4	5
-    //7	4	6
     
     func matrixMult(firstPart: [[Int]], second: [[Int]]) -> [[Int]]{
         
@@ -89,18 +93,23 @@ class AssignmentManager: NSObject {
         return result
     }
     
-    static func randomMatrix(max: Int) -> [[Int]] {
-        var result = [[Int]]()
-        for _ in 0..<Config.N {
-            result.append(randomVector(max: max))
-        }
-        return result
-    }
-    
-    static func randomVector(max: Int) -> [Int] {
-        let result = [Int](repeating: 0, count: Config.N)
-        return result.map { _ in Int(arc4random_uniform(UInt32(max))) + 1}
+    public static func topDownMerge(list: inout [Int], begin: Int,
+                                    middle: Int, end: Int) {
+        var i = begin, j = middle
+        let diff = end - begin
+        var result = [Int](repeating: 0, count: diff + 1)
         
+        for k in 0...diff {
+            if i < middle && (j >= (end + 1) || list[i] <= list[j]) {
+                result[k] = list[i]
+                i += 1
+            } else {
+                result[k] = list[j]
+                j += 1
+            }
+        }
+        
+        list[begin...end] = result[0...diff]
     }
     
     static func initMatrix(rows: Int, columns: Int) -> [[Int]] {

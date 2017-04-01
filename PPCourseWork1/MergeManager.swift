@@ -7,35 +7,32 @@
 //
 
 import Cocoa
+import Darwin
 
 class MergeManager: NSObject {
     
-    public static func merge<T:Comparable>(left: [T], right: [T], comparison: ((T, T) -> Bool)? = nil) -> [T] {
+    public static func topDownMerge(list: inout [Int], begin: Int,
+                      middle: Int, end: Int) {
+        var i = begin, j = middle
+        let diff = end - begin
+        var result = [Int](repeating: 0, count: diff + 1)
         
-        //use default parameter
-        guard let comparison = comparison else {
-            return merge(left: left, right: right, comparison: <)
-        }
-        
-        var result = [T]()
-        var left = left
-        var right = right
-        
-        while let firstLeft = left.first, let firstRight = right.first {
-            
-            if comparison(firstLeft, firstRight) {
-                result.append(firstLeft)
-                left.removeFirst()
+        for k in 0...diff {
+            if i < middle && (j >= (end + 1) || list[i] <= list[j]) {
+                result[k] = list[i]
+                i += 1
             } else {
-                result.append(firstRight)
-                right.removeFirst()
+                result[k] = list[j]
+                j += 1
             }
         }
         
-        result.append(contentsOf: left)
-        result.append(contentsOf: right)
-        
-        return result;
+        list[begin...end] = result[0...diff]
     }
  
 }
+
+
+
+
+

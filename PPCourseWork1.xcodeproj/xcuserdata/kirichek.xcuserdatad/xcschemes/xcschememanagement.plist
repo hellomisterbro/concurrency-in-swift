@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>PPCourseWorkUnitTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>3449E18F1E8577E000BDEFFE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>34F0A1BA1EC7123A007638FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>34F1CC971E90156200A95B03</key>
 		<dict>
 			<key>primary</key>
 			<true/>

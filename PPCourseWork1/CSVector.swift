@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct CSVector {
+class CSVector {
     private (set) var rawValue = [Int]()
     
     init(array:[Int]) {
@@ -24,7 +24,13 @@ struct CSVector {
         return CSVector(array: rawValue.sorted())
     }
     
-    mutating func mergeParts(begin: Int, middle: Int, end: Int) {
+    func replacePart(start: Int, end: Int, vector: CSVector) {
+        for i in start...end {
+            rawValue[i] = vector.rawValue[i - start]
+        }
+    }
+    
+    func mergeParts(begin: Int, middle: Int, end: Int) {
         var i = begin, j = middle
         let diff = end - begin
         var result = [Int](repeating: 0, count: diff + 1)

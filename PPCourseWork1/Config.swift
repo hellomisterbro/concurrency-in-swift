@@ -31,5 +31,8 @@ class Config: NSObject {
         let end = (process + 1 > remainder) ? delta : delta + 1
         return startFor(process: process) + end - 1
     }
-    
 }
+
+
+
+

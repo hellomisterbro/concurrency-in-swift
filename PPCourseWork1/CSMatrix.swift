@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct CSMatrix {
+class CSMatrix {
     private (set) var rawValue = [[Int]]()
     
     init(array: [[Int]]) {
@@ -16,8 +16,16 @@ struct CSMatrix {
     }
     
     func slice(start: Int, end: Int) -> CSMatrix{
-        let rawMatrixPart = Array(rawValue[start...end])
+        let rawMatrixPart = rawValue.map{Array($0[start...end])}
+//        let rawMatrixPart = Array(rawValue[start...end])
         return CSMatrix(array: rawMatrixPart)
+    }
+    
+    
+    func replacePart(start: Int, end: Int, matrix: CSMatrix) {
+        for i in start..<end {
+            rawValue[i] = matrix.rawValue[i - start]
+        }
     }
     
 }
@@ -25,30 +33,34 @@ struct CSMatrix {
 extension CSMatrix {
     
     static func *(matrix: CSMatrix, vector: CSVector) -> CSVector {
-        var result = [Int](repeating: 0, count: matrix.rawValue.count)
+
+        return vector * matrix
+    }
+    
+    static func *(vector: CSVector, matrix: CSMatrix) -> CSVector {
         
-        for i in 0..<matrix.rawValue.count {
+        var result = [Int](repeating: 0, count: matrix.rawValue[0].count)
+        
+        for i in 0..<matrix.rawValue[0].count {
             for j in 0..<vector.rawValue.count {
-                result[i] += vector.rawValue[j] * matrix.rawValue[i][j]
+                result[i] += vector.rawValue[j] * matrix.rawValue[j][i]
             }
         }
         return CSVector(array: result)
     }
     
-    static func *(vector: CSVector, matrix: CSMatrix) -> CSVector {
-        return matrix * vector
-    }
-    
     static func *(matrix1: CSMatrix, matrix2: CSMatrix) -> CSMatrix {
-        var result = [[Int]]()
+        let row = [Int](repeating: 0, count: matrix1.rawValue[0].count)
+        var result = [[Int]](repeating: row, count: matrix1.rawValue.count)
         
-        for i in 0..<matrix1.rawValue.count {
-            for j in 0..<matrix2.rawValue.count {
-                for k in 0..<matrix2.rawValue.count {
-                    result[i][j] += matrix1.rawValue[i][k] * matrix2.rawValue[k][j]
+        for i in 0..<matrix1.rawValue[0].count {
+            for j in 0..<matrix1.rawValue.count {
+                for k in 0..<matrix1.rawValue.count {
+                    result[j][i] += matrix1.rawValue[k][i] * matrix2.rawValue[j][k]
                 }
             }
         }
+        
         return CSMatrix(array: result)
     }
     

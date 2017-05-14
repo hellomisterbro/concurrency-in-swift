@@ -10,7 +10,8 @@ import Cocoa
 
 class CSDataSource: NSObject {
 
-    var N: Int!
+    var P: Int
+    var N: Int
     
     var e: Int?
     var c: Int?
@@ -21,12 +22,14 @@ class CSDataSource: NSObject {
     var B: CSVector?
     var MO: CSMatrix?
     
-    init(numberOfProcesses: Int) {
-        N = numberOfProcesses
+    init(numberOfProcesses: Int, size: Int) {
+        P = numberOfProcesses
+        N = size
     }
     
+    
     func randomizeAll() {
-        let randomizer = CSRandomizer(max: 10, size: N)
+        let randomizer = CSRandomizer(max: 10, size: 4)
         
         e = randomizer.randomVar()
         c = randomizer.randomVar()

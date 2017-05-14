@@ -10,26 +10,10 @@ import Cocoa
 
 //Assignment: A = sort(e*B + c*Z*(MO*MK))
 
-//let matrixMult = self.matrixMult(firstPart: self.MO!, second: MK!)
-//
-////X = c*Z
-//let X = Z!.map {$0 * c!} //correct
-//
-////Y = c*Z*(MO*MK)
-//let Y = matrixVectorMult(vector: X, matrixPart: matrixMult)
-//
-//// K = e*B
-//let K = self.B!.map{e! * $0}//!!!!!!!
-//
-//let result = vectorSum(first: K, second: Y).sorted()
-//
-//for i in start...end {
-//    self.A![i] = result[i - start]
-//}
 
 class CSTaskManager: NSObject {
     
-    var A: CSVector!
+    private var A: CSVector
     
     var dataSource: CSDataSource
     
@@ -40,9 +24,59 @@ class CSTaskManager: NSObject {
     
     init(dataSource: CSDataSource) {
         self.dataSource = dataSource
+        A = CSVector(array:[Int](repeating:0, count: dataSource.N))
     }
     
-    func doParallel() -> CSVector{
+    //Assignment: A = sort(e * B + c * Z *(MO * MK))
+    
+    func calculate() -> CSVector{
+        
+        let MOMultMK = dataSource.MK! * dataSource.MO!
+        
+        //X = c*Z
+        let ZMultC = dataSource.Z! * dataSource.c!
+        
+        //Y = c*Z*(MO*MK)
+        let Y = ZMultC * MOMultMK
+        
+        // K = e*B
+        let K = dataSource.B! * dataSource.e!
+        
+        let result = (K + Y).sorted()
+        
+        
+        return result
+    }
+    
+    func calculateSeparately() -> CSVector {
+        for i in 0..<dataSource.P {
+            calculate(process: i)
+        }
+        return A.sorted()
+    }
+    
+    private func calculate(process: Int) {
+        
+        let start = startFor(process: process)
+        let end = endFor(process: process)
+        
+        let MOMultMK = (dataSource.MK?.slice(start: start, end: end))! * dataSource.MO!
+        
+        //X = c*Z
+        let ZMultC = dataSource.Z! * dataSource.c!
+        
+        //Y = c*Z*(MO*MK)
+        let Y = ZMultC * MOMultMK
+        
+        // K = e*B
+        let K = (dataSource.B?.slice(start: start, end: end))! * dataSource.e!
+        
+        let result = K + Y
+        
+        A.replacePart(start: start, end: end, vector: result)
+    }
+    
+    func calculateParallel() -> CSVector{
         for i in 0..<Config.P {
             let queue = DispatchQueue(label: "Coursework.calculation-queue-\(i)")
             queues.append(queue)
@@ -161,5 +195,24 @@ class CSTaskManager: NSObject {
             print(A)
         }
         self.outputDataGroup.leave()
+    }
+    
+     func startFor(process: Int) -> Int {
+        let remainder = dataSource.N % dataSource.P
+        let delta = dataSource.N / dataSource.P
+        var start = delta * process
+        
+        start += (process + 1 > remainder) ? remainder : process
+        
+        return start
+    }
+    
+     func endFor(process: Int) -> Int{
+        let remainder = dataSource.N % dataSource.P
+        let delta = dataSource.N / dataSource.P
+        
+        let end = (process + 1 > remainder) ? delta : delta + 1
+        
+        return startFor(process: process) + end - 1
     }
 }

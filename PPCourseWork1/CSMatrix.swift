@@ -49,14 +49,14 @@ extension CSMatrix {
         return CSVector(array: result)
     }
     
-    static func *(matrix1: CSMatrix, matrix2: CSMatrix) -> CSMatrix {
+    static func *(madtrix2: CSMatrix, matrix1: CSMatrix) -> CSMatrix {
         let row = [Int](repeating: 0, count: matrix1.rawValue[0].count)
         var result = [[Int]](repeating: row, count: matrix1.rawValue.count)
         
         for i in 0..<matrix1.rawValue[0].count {
             for j in 0..<matrix1.rawValue.count {
                 for k in 0..<matrix1.rawValue.count {
-                    result[j][i] += matrix1.rawValue[k][i] * matrix2.rawValue[j][k]
+                    result[j][i] += matrix1.rawValue[k][i] * madtrix2.rawValue[j][k]
                 }
             }
         }

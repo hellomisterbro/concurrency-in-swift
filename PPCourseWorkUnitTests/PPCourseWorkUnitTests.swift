@@ -91,7 +91,7 @@ class PPCourseWorkUnitTests: XCTestCase {
                               [1, 1, 1, 1],
                               [1, 1, 1, 1]])
         
-        result = MK * MO
+        result = MO * MK
         
         
         XCTAssertEqual(result.rawValue as NSObject, [[4, 4],
@@ -126,7 +126,7 @@ class PPCourseWorkUnitTests: XCTestCase {
         
         let am = CSTaskManager(dataSource: dataSource)
         
-        let result = am.calculate()
+        let result = am.calculateSerially()
          XCTAssertEqual(result.rawValue, [17, 17, 17, 17], "Calculation doesnt work")
        
     }
@@ -156,7 +156,7 @@ class PPCourseWorkUnitTests: XCTestCase {
         
         let am = CSTaskManager(dataSource: dataSource)
         
-        let result = am.calculate()
+        let result = am.calculateSerially()
         XCTAssertEqual(result.rawValue, [190, 190, 190, 204], "Calculation doesnt work")
         
     }
@@ -193,7 +193,7 @@ class PPCourseWorkUnitTests: XCTestCase {
     //Assignment: A = sort(e * B + c * Z *(MO * MK))
     func testNotParallelWithSlices2() {
         
-        let dataSource = CSDataSource(numberOfProcesses: 4, size: 4)
+        let dataSource = CSDataSource(numberOfProcesses: 3, size: 4)
         
         dataSource.e = 2
         dataSource.c = 1
@@ -220,6 +220,36 @@ class PPCourseWorkUnitTests: XCTestCase {
         
     }
     
+    
+    //Assignment: A = sort(e * B + c * Z *(MO * MK))
+    func testParallel1() {
+        
+        let dataSource = CSDataSource(numberOfProcesses: 3, size: 4)
+        
+        dataSource.e = 2
+        dataSource.c = 1
+        
+        dataSource.Z = CSVector(array:[1, 3, 1, 1])
+        
+        dataSource.MO = CSMatrix(array: [[1, 2, 3, 4],
+                                         [5, 6, 7, 8],
+                                         [9, 10, 11, 12],
+                                         [13, 14, 15, 16]])
+        
+        dataSource.MK = CSMatrix(array: [[1, 2, 3, 4],
+                                         [5, 6, 7, 8],
+                                         [9, 10, 11, 12],
+                                         [13, 14, 15, 16]])
+        
+        dataSource.B = CSVector(array:[1, 8, 1, 1])
+        
+        
+        let am = CSTaskManager(dataSource: dataSource)
+        
+        let result = am.calculateParallel()
+        XCTAssertEqual(result.rawValue, [1438, 1640, 1814, 2002], "Calculation doesnt work")
+        
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

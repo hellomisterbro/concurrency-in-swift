@@ -29,7 +29,7 @@ class CSDataSource: NSObject {
     
     
     func randomizeAll() {
-        let randomizer = CSRandomizer(max: 10, size: 4)
+        let randomizer = CSRandomizer(max: 1, size: N)
         
         e = randomizer.randomVar()
         c = randomizer.randomVar()

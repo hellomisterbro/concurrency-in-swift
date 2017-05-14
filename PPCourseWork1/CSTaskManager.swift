@@ -22,11 +22,7 @@ class CSTaskManager: NSObject {
         A = CSVector(array:[Int](repeating:0, count: dataSource.N))
     }
     
-
-    
-
-    
-     func startFor(process: Int) -> Int {
+    func startFor(process: Int) -> Int {
         let remainder = dataSource.N % dataSource.P
         let delta = dataSource.N / dataSource.P
         var start = delta * process
@@ -36,7 +32,7 @@ class CSTaskManager: NSObject {
         return start
     }
     
-     func endFor(process: Int) -> Int{
+    func endFor(process: Int) -> Int{
         let remainder = dataSource.N % dataSource.P
         let delta = dataSource.N / dataSource.P
         

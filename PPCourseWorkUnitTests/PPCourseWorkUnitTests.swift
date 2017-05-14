@@ -11,8 +11,55 @@ import XCTest
 
 class PPCourseWorkUnitTests: XCTestCase {
     
+    var dataSource1: CSDataSource!
+    var dataSource2: CSDataSource!
+    
     override func setUp() {
         super.setUp()
+        
+        let dataSource1 = CSDataSource(numberOfProcesses: 3, size: 4)
+        
+        dataSource1.e = 2
+        dataSource1.c = 1
+        
+        dataSource1.Z = CSVector(array:[1, 3, 1, 1])
+        
+        dataSource1.MO = CSMatrix(array: [[1, 2, 3, 4],
+                                         [5, 6, 7, 8],
+                                         [9, 10, 11, 12],
+                                         [13, 14, 15, 16]])
+        
+        dataSource1.MK = CSMatrix(array: [[1, 2, 3, 4],
+                                         [5, 6, 7, 8],
+                                         [9, 10, 11, 12],
+                                         [13, 14, 15, 16]])
+        
+        dataSource1.B = CSVector(array:[1, 8, 1, 1])
+        
+        self.dataSource1 = dataSource1
+        
+        let dataSource2 = CSDataSource(numberOfProcesses: 4, size: 4)
+        
+        dataSource2.e = 2
+        dataSource2.c = 1
+        
+        dataSource2.Z = CSVector(array:[1, 3, 1, 1])
+        
+        dataSource2.MO = CSMatrix(array: [[1, 2, 3, 4],
+                                         [5, 6, 7, 8],
+                                         [9, 10, 11, 12],
+                                         [13, 14, 15, 16]])
+        
+        dataSource2.MK = CSMatrix(array: [[1, 1, 1, 1],
+                                         [1, 1, 1, 1],
+                                         [1, 1, 1, 1],
+                                         [1, 1, 1, 1]])
+        
+        dataSource2.B = CSVector(array:[1, 8, 1, 1])
+        
+        self.dataSource2 = dataSource2
+        
+        
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -124,9 +171,9 @@ class PPCourseWorkUnitTests: XCTestCase {
         dataSource.B = CSVector(array:[1, 1, 1, 1])
         
         
-        let am = CSTaskManager(dataSource: dataSource)
+        let am = CSConcurrentTaskManager(dataSource: dataSource)
         
-        let result = am.calculateSerially()
+        let result = am.calculateConcurrently()
          XCTAssertEqual(result.rawValue, [17, 17, 17, 17], "Calculation doesnt work")
        
     }
@@ -134,56 +181,17 @@ class PPCourseWorkUnitTests: XCTestCase {
         //Assignment: A = sort(e * B + c * Z *(MO * MK))
     func testNotParallel2() {
         
-        let dataSource = CSDataSource(numberOfProcesses: 1, size: 4)
         
-        dataSource.e = 2
-        dataSource.c = 1
+        let am = CSConcurrentTaskManager(dataSource: dataSource2)
         
-        dataSource.Z = CSVector(array:[1, 3, 1, 1])
-        
-        dataSource.MO = CSMatrix(array: [[1, 2, 3, 4],
-                                         [5, 6, 7, 8],
-                                         [9, 10, 11, 12],
-                                         [13, 14, 15, 16]])
-        
-        dataSource.MK = CSMatrix(array: [[1, 1, 1, 1],
-                                         [1, 1, 1, 1],
-                                         [1, 1, 1, 1],
-                                         [1, 1, 1, 1]])
-        
-        dataSource.B = CSVector(array:[1, 8, 1, 1])
-        
-        
-        let am = CSTaskManager(dataSource: dataSource)
-        
-        let result = am.calculateSerially()
+        let result = am.calculateConcurrently()
         XCTAssertEqual(result.rawValue, [190, 190, 190, 204], "Calculation doesnt work")
         
     }
     
     func testNotParallelWithSlices1() {
         
-        let dataSource = CSDataSource(numberOfProcesses: 4, size: 4)
-        
-        dataSource.e = 2
-        dataSource.c = 1
-        
-        dataSource.Z = CSVector(array:[1, 3, 1, 1])
-        
-        dataSource.MO = CSMatrix(array: [[1, 2, 3, 4],
-                                         [5, 6, 7, 8],
-                                         [9, 10, 11, 12],
-                                         [13, 14, 15, 16]])
-        
-        dataSource.MK = CSMatrix(array: [[1, 1, 1, 1],
-                                         [1, 1, 1, 1],
-                                         [1, 1, 1, 1],
-                                         [1, 1, 1, 1]])
-        
-        dataSource.B = CSVector(array:[1, 8, 1, 1])
-        
-        
-        let am = CSTaskManager(dataSource: dataSource)
+        let am = CSConcurrentTaskManager(dataSource: dataSource2)
         
         let result = am.calculateSeparately() 
         XCTAssertEqual(result.rawValue, [190, 190, 190, 204], "Calculation doesnt work")
@@ -193,27 +201,7 @@ class PPCourseWorkUnitTests: XCTestCase {
     //Assignment: A = sort(e * B + c * Z *(MO * MK))
     func testNotParallelWithSlices2() {
         
-        let dataSource = CSDataSource(numberOfProcesses: 3, size: 4)
-        
-        dataSource.e = 2
-        dataSource.c = 1
-        
-        dataSource.Z = CSVector(array:[1, 3, 1, 1])
-        
-        dataSource.MO = CSMatrix(array: [[1, 2, 3, 4],
-                                         [5, 6, 7, 8],
-                                         [9, 10, 11, 12],
-                                         [13, 14, 15, 16]])
-        
-        dataSource.MK = CSMatrix(array: [[1, 2, 3, 4],
-                                         [5, 6, 7, 8],
-                                         [9, 10, 11, 12],
-                                         [13, 14, 15, 16]])
-        
-        dataSource.B = CSVector(array:[1, 8, 1, 1])
-        
-        
-        let am = CSTaskManager(dataSource: dataSource)
+        let am = CSConcurrentTaskManager(dataSource: dataSource1)
         
         let result = am.calculateSeparately()
         XCTAssertEqual(result.rawValue, [1438, 1640, 1814, 2002], "Calculation doesnt work")
@@ -223,28 +211,8 @@ class PPCourseWorkUnitTests: XCTestCase {
     
     //Assignment: A = sort(e * B + c * Z *(MO * MK))
     func testParallel1() {
-        
-        let dataSource = CSDataSource(numberOfProcesses: 3, size: 4)
-        
-        dataSource.e = 2
-        dataSource.c = 1
-        
-        dataSource.Z = CSVector(array:[1, 3, 1, 1])
-        
-        dataSource.MO = CSMatrix(array: [[1, 2, 3, 4],
-                                         [5, 6, 7, 8],
-                                         [9, 10, 11, 12],
-                                         [13, 14, 15, 16]])
-        
-        dataSource.MK = CSMatrix(array: [[1, 2, 3, 4],
-                                         [5, 6, 7, 8],
-                                         [9, 10, 11, 12],
-                                         [13, 14, 15, 16]])
-        
-        dataSource.B = CSVector(array:[1, 8, 1, 1])
-        
-        
-        let am = CSTaskManager(dataSource: dataSource)
+
+        let am = CSParallelTaskManager(dataSource: dataSource1)
         
         let result = am.calculateParallel()
         XCTAssertEqual(result.rawValue, [1438, 1640, 1814, 2002], "Calculation doesnt work")

@@ -17,7 +17,6 @@ class CSMatrix {
     
     func slice(start: Int, end: Int) -> CSMatrix{
         let rawMatrixPart = rawValue.map{Array($0[start...end])}
-//        let rawMatrixPart = Array(rawValue[start...end])
         return CSMatrix(array: rawMatrixPart)
     }
     

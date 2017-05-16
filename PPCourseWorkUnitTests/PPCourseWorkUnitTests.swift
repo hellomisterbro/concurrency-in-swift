@@ -315,41 +315,53 @@ class PPCourseWorkUnitTests: XCTestCase {
     //Assignment: A = sort(e * B + c * Z *(MO * MK))
     func testParallel4() {
         
-        let n = 1600
-        let i = 8
+        let n = 18
+        let i = 16
+        for i in 2..<n {
+            let dataSource1 = CSDataSource(numberOfProcesses: i, size: n)
+            
+            dataSource1.randomizeAll()
+            
+            var concurrentResult:CSVector!
+            var result:CSVector!
+            
+            
+            let concurrentlManager = CSConcurrentTaskManager(dataSource: dataSource1)
+            concurrentResult = concurrentlManager.calculateConcurrently()
+            
+            let methodStart = Date()
+            
+            let parallelManager = CSParallelTaskManager(dataSource: dataSource1)
+            result = parallelManager.calculateParallel()
+            
+            XCTAssertEqual(result.rawValue.sorted(), result.rawValue, "Calculation doesnt work P = \(i); N = \(n);")
+        }
+    
+    }
+    
+    func testConcurrentTime() {
+        
+        let n = 800
+        let i = 4
         //        for i in 2..<n {
         let dataSource1 = CSDataSource(numberOfProcesses: i, size: n)
         
         dataSource1.randomizeAll()
         
         var concurrentResult:CSVector!
-        var result:CSVector!
+
         
-//        self.measure {
-//            let concurrentlManager = CSConcurrentTaskManager(dataSource: dataSource1)
-//            concurrentResult = concurrentlManager.calculateConcurrently()
-//        }
-    
         self.measure {
-            let parallelManager = CSParallelTaskManager(dataSource: dataSource1)
-            result = parallelManager.calculateParallel()
+            let concurrentlManager = CSConcurrentTaskManager(dataSource: dataSource1)
+            concurrentResult = concurrentlManager.calculateConcurrently()
         }
-        
-        
-        XCTAssertEqual(result.rawValue.sorted(), result.rawValue, "Calculation doesnt work P = \(i); N = \(n);")
-        //        }
+
+        XCTAssertEqual(concurrentResult.rawValue.sorted(), concurrentResult.rawValue, "Calculation doesnt work P = \(i); N = \(n);")
+
         
     }
     
     
-    
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+
 }
 

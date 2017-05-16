@@ -18,7 +18,6 @@ class CSDataSource: NSObject {
     var Z: CSVector?
     var MK: CSMatrix?
     
-    //not shared
     var B: CSVector?
     var MO: CSMatrix?
     

@@ -10,7 +10,7 @@ import Foundation
 
 func testParallel(processors: Int, elements: Int) {
     
-    print("\(processors) thread with \(elements) elements started.")
+    print("\n\n\(processors) thread with \(elements) elements started.")
     
     let dataSource1 = CSDataSource(numberOfProcesses: processors, size: elements)
     
@@ -24,12 +24,12 @@ func testParallel(processors: Int, elements: Int) {
     let methodFinish = Date()
     let executionTime = methodFinish.timeIntervalSince(methodStart)
     
-    print("Time for \(processors) threads with \(elements) elements: \(executionTime).")
+    print("\nTime for \(processors) threads with \(elements) elements: \(executionTime).")
 }
 
 func testConcurrent(elements: Int) {
   
-    print("1 thread with \(elements) elements started.")
+    print("\n\n1 thread with \(elements) elements started.")
     
     let dataSource1 = CSDataSource(numberOfProcesses: 1, size: elements)
     
@@ -37,7 +37,7 @@ func testConcurrent(elements: Int) {
     
     let methodStart = Date()
     
-    let parallelManager = CSConcurrentTaskManager(dataSource: dataSource1)
+    let parallelManager = CSSerialTaskManager(dataSource: dataSource1)
     let _ = parallelManager.calculateConcurrently()
     
     let methodFinish = Date()
@@ -53,7 +53,6 @@ func test(elements: Int) {
     testParallel(processors: 3, elements: elements)
     testParallel(processors: 4, elements: elements)
 }
-
 
 test(elements: 900)
 test(elements: 1800)

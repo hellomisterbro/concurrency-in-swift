@@ -20,8 +20,8 @@
 		34D410ED1EC726FE00575CE3 /* CSRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C9B721EC4EB4C00966325 /* CSRandomizer.swift */; };
 		34D410F11EC8C3CB00575CE3 /* CSParallelTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D410F01EC8C3CB00575CE3 /* CSParallelTaskManager.swift */; };
 		34D410F21EC8C3CB00575CE3 /* CSParallelTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D410F01EC8C3CB00575CE3 /* CSParallelTaskManager.swift */; };
-		34D410F41EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D410F31EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift */; };
-		34D410F51EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D410F31EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift */; };
+		34D410F41EC8C3EC00575CE3 /* CSSerialTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D410F31EC8C3EC00575CE3 /* CSSerialTaskManager.swift */; };
+		34D410F51EC8C3EC00575CE3 /* CSSerialTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D410F31EC8C3EC00575CE3 /* CSSerialTaskManager.swift */; };
 		34F0A1BE1EC7123A007638FC /* PPCourseWorkUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F0A1BD1EC7123A007638FC /* PPCourseWorkUnitTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 		3449E1901E8577E000BDEFFE /* PPCourseWork1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PPCourseWork1; sourceTree = BUILT_PRODUCTS_DIR; };
 		3449E1931E8577E000BDEFFE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		34D410F01EC8C3CB00575CE3 /* CSParallelTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSParallelTaskManager.swift; sourceTree = "<group>"; };
-		34D410F31EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCuncurrentTaskManager.swift; sourceTree = "<group>"; };
+		34D410F31EC8C3EC00575CE3 /* CSSerialTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSSerialTaskManager.swift; sourceTree = "<group>"; };
 		34F0A1BB1EC7123A007638FC /* PPCourseWorkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PPCourseWorkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34F0A1BD1EC7123A007638FC /* PPCourseWorkUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPCourseWorkUnitTests.swift; sourceTree = "<group>"; };
 		34F0A1BF1EC7123A007638FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 				341C9B741EC4F83800966325 /* CSDataSource.swift */,
 				341C9B721EC4EB4C00966325 /* CSRandomizer.swift */,
 				3431AE8D1E896DC200A7AE69 /* CSTaskManager.swift */,
-				34D410F31EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift */,
+				34D410F31EC8C3EC00575CE3 /* CSSerialTaskManager.swift */,
 				34D410F01EC8C3CB00575CE3 /* CSParallelTaskManager.swift */,
 			);
 			name = "Task Manager";
@@ -223,7 +223,7 @@
 				3431AE8E1E896DC200A7AE69 /* CSTaskManager.swift in Sources */,
 				341C9B6B1EC472DF00966325 /* CSMatrix.swift in Sources */,
 				341C9B6D1EC4732300966325 /* CSVector.swift in Sources */,
-				34D410F41EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift in Sources */,
+				34D410F41EC8C3EC00575CE3 /* CSSerialTaskManager.swift in Sources */,
 				3449E1941E8577E000BDEFFE /* main.swift in Sources */,
 				341C9B731EC4EB4C00966325 /* CSRandomizer.swift in Sources */,
 				341C9B751EC4F83800966325 /* CSDataSource.swift in Sources */,
@@ -238,7 +238,7 @@
 				34D410EC1EC726FB00575CE3 /* CSVector.swift in Sources */,
 				34D410E81EC726D900575CE3 /* CSDataSource.swift in Sources */,
 				34D410ED1EC726FE00575CE3 /* CSRandomizer.swift in Sources */,
-				34D410F51EC8C3EC00575CE3 /* CSCuncurrentTaskManager.swift in Sources */,
+				34D410F51EC8C3EC00575CE3 /* CSSerialTaskManager.swift in Sources */,
 				34D410EB1EC726F800575CE3 /* CSMatrix.swift in Sources */,
 				34F0A1BE1EC7123A007638FC /* PPCourseWorkUnitTests.swift in Sources */,
 				34D410EA1EC726F600575CE3 /* CSTaskManager.swift in Sources */,

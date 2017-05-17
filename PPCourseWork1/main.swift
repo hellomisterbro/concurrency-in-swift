@@ -54,9 +54,7 @@ func test(elements: Int) {
     testParallel(processors: 4, elements: elements)
 }
 
-test(elements: 900)
-test(elements: 1800)
-test(elements: 2400)
+test(elements: 16)
 
 
 
